@@ -12,3 +12,4 @@ doc/*.txt
 doc/**/*.pdf
 .idea
 *.iml
+target
