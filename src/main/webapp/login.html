@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+<form action="loginServlet" method="get">
+    用 户：&nbsp;&nbsp;&nbsp;<input type="text" name="username"><BR>
+    密 码：&nbsp;&nbsp;&nbsp;<input type="text" name="password"><BR>
+    验证码：<input type="text" name="checkCode">8774<BR>
+    类别：&nbsp;&nbsp;&nbsp;&nbsp;
+    <select name="type">
+        <option value="学生">学 生</option>
+        <option value="辅导员">辅导员</option>
+    </select><BR>
+    <input type="submit" value="登录">
+    <span style="color: purple; ">帮助 忘密</span>
+</form>
+</body>
+</html>
