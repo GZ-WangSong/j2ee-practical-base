@@ -19,7 +19,7 @@
 > 如果有参考者发现这个糟糕的东西，又想做一下参考，那此处附上版本号，可以直接使用git命名快速切换到对应的作业代码。
 
 1. 第1次作业：`7684cec1994defeba8df12254e166245538b1dba`；
-2. 第2次作业：`e88b3523bef2c0082cfcea5dfbe662d055525af3`
+2. 第2次作业：`e88b3523bef2c0082cfcea5dfbe662d055525af3`；
 3. 第3次作业：
 4. 第4次作业：
 5. 第5次作业：
@@ -29,11 +29,21 @@
 
 
 
+---
+
+
+
+
+
 ## 3 作业具体要求
 
 ### 3.1 第1次作业要求
 
 本次作业只是为了考察大家是否将基本环境搭建完成，即Tomcat服务器是否配置成功，是否能正常使用。
+
+---
+
+
 
 
 
@@ -49,3 +59,41 @@
 5)	所有的截图包括URL信息
 6)	提交项目文件。
 7)	提交截止日期：2022年3月6日晚8点
+
+---
+
+
+
+### 3.3 第3次作业要求
+
+熟悉HTML标记语言和Servlet编程API文档，设计和开发一个web应用。具体要求如下：
+
+1. 项目名称为“序号-Homework”，web应用名称“Homework_序号”；序号与各自在群里的序号保持一致；
+
+2. 熟悉ServletConfig和ServletContext编程接口。创建一个servlet名为“HelloWorldServlet”，为该servlet设置两个初始化参数，参数名分别为name和student_no，参数值分别为“学生姓名”和“学号”（每个同学使用自己的姓名和学号）；为该应用程序设置一个初始化参数，参数名为course，参数值为“JavaEE实用基础”。运行该servlet，输出格式为
+
+   ```txt
+   我是学号为#student_no的#name同学，
+   这是从#course中学习到的一个简单servlet程序
+   ```
+
+**提交该功能点的截图**。
+
+3. 创建SharedServlet，实现下列功能：
+
+   a) 通过ServletContext获得web应用参数，参数id，值为“各自的序号”，读取参数值；
+
+   b) 通过ServletContext绑定一个对象，该对象保存int类型的数，值为参数id的数值+1；
+
+   c) 通过HttpSession绑定一个对象，该对象保存int类型的数，值为参数id的数值+2。创建ValidateSharedServlet，设计若干个场景，描述清楚ServletContext和HttpSession作为容器对象的差异。开放式命题，到达识别差异为目标，若有必要，可以额外增加web资源。**提交该功能点的截图（可以不止一个截图）**。
+
+4. 开发一个包含学生选课情况汇总表的页面course.jsp，表格如下所示，提交该功能点的截图。
+
+<img src="https://gitee.com/NJUSTer_songw/my-images/raw/master/clip_image002.jpg" alt="img" style="zoom:60%;" />
+
+5. 所有的截图包括URL信息
+6. 提交项目文件。
+7. 提交截止日期：2022年3月15日晚8点
+
+---
+

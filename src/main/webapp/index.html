@@ -6,14 +6,39 @@
 </head>
 <body>
 <div>
+    <!-- 第1次作业 -->
     <p>第一次作业 | 环境搭建运行 | 测试正常</p>
-    <input type="button" value="去登录" onclick="goLogin()">
+
+    <!-- 第2次作业 -->
+    <input type="button" value="去登录" onclick="goLogin()"/>
+    <br>
+
+    <!-- 第3次作业 -->
+    <form action="helloWorldServlet" method="get">
+        <input type="submit" value="测试 HelloWorldServlet 功能">
+    </form>
+    <br>
+    <form action="sharedServlet" method="get">
+        <input type="submit" value="测试 sharedServlet">
+    </form>
+    <br>
+    <form action="validateSharedServlet" method="get">
+        <input type="submit" value="测试 validateSharedServlet">
+    </form>
+    <br>
+
+    <input type="button" value="查看课程表" onclick="goCourse()"/>
+
+
 </div>
 </body>
 
 <script>
-     function goLogin() {
+    function goLogin() {
         location.href = './login.html'
+    }
+    function goCourse() {
+        location.href = 'course.jsp'
     }
 </script>
 

@@ -4,17 +4,65 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- 为应用程序设置参数 -->
+    <context-param>
+        <param-name>course</param-name>
+        <param-value>JavaEE实用基础</param-value>
+    </context-param>
+    <context-param>
+        <param-name>id</param-name>
+        <param-value>59</param-value>
+    </context-param>
+
     <!-- 这里按照课程所学，先使用xml文件配置Servlet -->
     <!-- Servlet信息 -->
+
+    <!-- 第2次作业 -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>cn.edu.njust.controller.LoginServlet</servlet-class>
     </servlet>
+    <!-- 第3次作业 -->
+    <servlet>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-class>cn.edu.njust.controller.HelloWorldServlet</servlet-class>
+        <init-param>
+            <param-name>student_no</param-name>
+            <param-value>920106840701</param-value>
+        </init-param>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>李星云</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>SharedServlet</servlet-name>
+        <servlet-class>cn.edu.njust.controller.SharedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidateSharedServlet</servlet-name>
+        <servlet-class>cn.edu.njust.controller.ValidateSharedServlet</servlet-class>
+    </servlet>
 
     <!-- Servlet映射 -->
+    <!-- 第2次作业 -->
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 第3次作业 -->
+    <servlet-mapping>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <url-pattern>/helloWorldServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SharedServlet</servlet-name>
+        <url-pattern>/sharedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidateSharedServlet</servlet-name>
+        <url-pattern>/validateSharedServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
