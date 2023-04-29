@@ -20,12 +20,12 @@
     <!-- 第2次作业 -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>cn.edu.njust.controller.LoginServlet</servlet-class>
+        <servlet-class>cn.edu.njust.servlet.LoginServlet</servlet-class>
     </servlet>
     <!-- 第3次作业 -->
     <servlet>
         <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>cn.edu.njust.controller.HelloWorldServlet</servlet-class>
+        <servlet-class>cn.edu.njust.servlet.HelloWorldServlet</servlet-class>
         <init-param>
             <param-name>student_no</param-name>
             <param-value>920106840701</param-value>
@@ -37,11 +37,11 @@
     </servlet>
     <servlet>
         <servlet-name>SharedServlet</servlet-name>
-        <servlet-class>cn.edu.njust.controller.SharedServlet</servlet-class>
+        <servlet-class>cn.edu.njust.servlet.SharedServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ValidateSharedServlet</servlet-name>
-        <servlet-class>cn.edu.njust.controller.ValidateSharedServlet</servlet-class>
+        <servlet-class>cn.edu.njust.servlet.ValidateSharedServlet</servlet-class>
     </servlet>
 
     <!-- Servlet映射 -->

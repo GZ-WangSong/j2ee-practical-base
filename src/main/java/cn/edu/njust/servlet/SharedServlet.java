@@ -1,4 +1,4 @@
-package cn.edu.njust.controller;
+package cn.edu.njust.servlet;
 /**
  * -*- coding: UTF-8 -*-
  *

@@ -97,3 +97,40 @@
 
 ---
 
+
+
+### 3.4 第4次作业要求
+
+熟悉HTML标记语言、Servlet编程API文档、JSP页面元素和MVC设计模式，设计和开发一个基于MVC的web应用。具体要求如下：
+
+1. 项目名称为“序号-Homework”，web应用名称“Homework_序号”；序号与各自在群里的序号保持一致；
+
+2. 实现登录功能
+
+   1. 创建3个jsp页面，分别为login.jsp、main.jsp和loginFailure.jsp
+
+      i.	login.jsp 负责实现登录表单，包括用户名、密码和验证码，“所在学院”【下拉列表】、“所在系”【下拉列表】，要求实现系与学院的联动，即选择的学院改变所在系的选项也同步变化（学习javascript，可以实现该联动功能）；
+
+![image-20230429110532782](https://gitee.com/NJUSTer_songw/my-images/raw/master/image-20230429110532782.png)
+
+​               ii.	loginFailure 负责给出登录失败的原因描述，并能跳转到login.jsp进行重新登录。
+
+​               iii.	main.jsp 负责实现提示登录成功，5秒钟后自动跳转到course.jsp页面（course.jsp沿用已完成的第3次作业对应页面）
+
+- 创建1个实体类Login，封装用户名、密码等信息；
+- 创建1个登录业务逻辑处理类LoginService，实现登录业务逻辑处理；
+- 创建1个用户数据访问类UserDAO，读写用户数据，可以正常登录的用户登录信息可以在UserDAO进行设定，无需访问数据库（后续会扩展）；
+- 创建1个servlet，名为LoginController，负责实现控制器功能，完成请求数据获取和封装、将请求分发到业务逻辑处理对象LoginService（实现登录逻辑），并根据业务处理结果确定何时的结果展示页面：main.jsp（登录成功）或loginFailure.jsp（登录失败，给出原因）。
+
+3. 开发一个包含学生选课情况汇总表的页面course.jsp，表格如下所示，提交该功能点的截图。
+
+<img src="https://gitee.com/NJUSTer_songw/my-images/raw/master/clip_image002.jpg" alt="img" style="zoom:60%;" />
+
+4. 所有的截图包括URL信息，截图不要打包到项目文件中，单独以图片形式上传。
+
+5. 提交项目文件。
+
+6. 提交截止日期：2022年3月22日晚8点
+
+---
+

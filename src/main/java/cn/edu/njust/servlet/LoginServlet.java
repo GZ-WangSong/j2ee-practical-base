@@ -1,6 +1,7 @@
-package cn.edu.njust.controller;
+package cn.edu.njust.servlet;
 
 import cn.edu.njust.service.LoginService;
+import cn.edu.njust.service.impl.LoginServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet {
 
-    private final LoginService loginService = new LoginService();
+    private final LoginService loginService = new LoginServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
