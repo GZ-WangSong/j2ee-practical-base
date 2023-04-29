@@ -1,5 +1,8 @@
 package cn.edu.njust.service.impl;
 
+import cn.edu.njust.dao.UserDAO;
+import cn.edu.njust.dao.impl.UserDAOImpl;
+import cn.edu.njust.pojo.Login;
 import cn.edu.njust.service.LoginService;
 
 import java.util.Random;
@@ -13,6 +16,8 @@ import java.util.Random;
  * @Description:
  */
 public class LoginServiceImpl implements LoginService {
+    private UserDAO userDAO = new UserDAOImpl();
+
 
     @Override
     public Integer randomInt(int value) {
@@ -22,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
 
         if (value % 2 == 0) {
             return ranNum;
-        }else {
+        } else {
             return ranNum + 10;
         }
     }
@@ -54,5 +59,22 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean checkSafeCode(String safeCode) {
         return safeCode.equals("8774");
+    }
+
+    public int success(Login login) {
+        return userDAO.findByName(login);
+    }
+
+    public String reason(int result) {
+        if (result == 1)
+            return "查无此人";
+        else if (result == 2)
+            return "密码错误";
+        else if (result == 3)
+            return "验证码错误";
+        else if (result == 4)
+            return "学院错误";
+        else
+            return "专业不恰当";
     }
 }

@@ -1,5 +1,7 @@
 package cn.edu.njust.service;
 
+import cn.edu.njust.pojo.Login;
+
 /**
  * -*- coding: UTF-8 -*-
  *
@@ -15,4 +17,8 @@ public interface LoginService {
     boolean checkEmpty(String name, String password, String safeCode);
 
     boolean checkSafeCode(String safeCode);
+
+    int success(Login login);
+
+    String reason(int result);
 }

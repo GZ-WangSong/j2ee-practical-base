@@ -1,5 +1,7 @@
 package cn.edu.njust.dao;
 
+import cn.edu.njust.pojo.Login;
+
 /**
  * -*- coding: UTF-8 -*-
  *
@@ -9,5 +11,5 @@ package cn.edu.njust.dao;
  * @Description:
  */
 public interface UserDAO {
-
+    int findByName(Login login);
 }

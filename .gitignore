@@ -13,3 +13,4 @@ doc/**/*.pdf
 *.iml
 target
 /target/
+/README.assets/
