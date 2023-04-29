@@ -2,6 +2,8 @@ package cn.edu.njust.dao;
 
 import cn.edu.njust.pojo.Course;
 
+import java.util.List;
+
 /**
  * -*- coding: UTF-8 -*-
  *
@@ -11,6 +13,6 @@ import cn.edu.njust.pojo.Course;
  * @Description:
  */
 public interface CourseDAO {
-    Course readCourse();
+    List<Course> getCourse();
     int deleteCourse(String[] s);
 }

@@ -2,6 +2,7 @@
 <%@ page import="cn.edu.njust.dao.impl.CourseDAOImpl" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="cn.edu.njust.pojo.Course" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,16 +12,10 @@
 <div>
     <a href="course.jsp">查看全部课程</a>
     <%
-        CourseDAO courseDAO = new CourseDAOImpl();
-        // 读取对象
-        Course course = courseDAO.readCourse();
-        ArrayList<String> Idlist = course.getcIdList();
-        ArrayList<String> nameList = course.getcNameList();
-        ArrayList<String> numList = course.getcNumList();
-        ArrayList<String> typeList = course.getcTypeList();
-
+        // 1.获取课程列表
+        List<Course> courseList = new CourseDAOImpl().getCourse();
     %>
-    <table border="2">
+    <table border="1">
         <tr>
             <td>&nbsp;</td>
             <td><b>序号</b></td>
@@ -29,17 +24,17 @@
             <td><b>课程性质</b></td>
         </tr>
         <%
-            for (int i = 0; i < Idlist.size(); i++) {
+            for (Course course : courseList) {
         %>
         <tr>
             <td><input type="checkbox"></td>
-            <td><%=Idlist.get(i)%>
+            <td><%=course.getCourseId()%>
             </td>
-            <td><%=nameList.get(i)%>
+            <td><%=course.getCourseName()%>
             </td>
-            <td><%=numList.get(i)%>
+            <td><%=course.getCourseNum()%>
             </td>
-            <td><%=typeList.get(i)%>
+            <td><%=course.getCourseType()%>
             </td>
         </tr>
         <%

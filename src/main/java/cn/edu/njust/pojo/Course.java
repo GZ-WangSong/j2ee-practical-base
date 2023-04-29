@@ -1,94 +1,50 @@
 package cn.edu.njust.pojo;
 
-import java.util.ArrayList;
-
 public class Course {
-    private String cId;
-    private String cName;
-    private int cNum;
-    private String cType;
-
-    private ArrayList<String> cIdList;
-    private ArrayList<String> cNameList;
-    private ArrayList<String> cNumList;
-    private ArrayList<String> cTypeList;
+    private String courseId;
+    private String courseName;
+    private int courseNum;
+    private String courseType;
 
     public Course() {
     }
 
-    public Course(String cname, int num) {
-        this.cName = cname;
-        this.cNum = num;
+    public Course(String courseId, String courseName, int courseNum, String courseType) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.courseNum = courseNum;
+        this.courseType = courseType;
     }
 
-    public Course(String id, String name, int num, String type) {
-        this.cId = id;
-        this.cName = name;
-        this.cNum = num;
-        this.cType = type;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public String getcId() {
-        return cId;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public void setcId(String cId) {
-        this.cId = cId;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public String getcName() {
-        return cName;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public void setcName(String cName) {
-        this.cName = cName;
+    public int getCourseNum() {
+        return courseNum;
     }
 
-    public int getcNum() {
-        return cNum;
+    public void setCourseNum(int courseNum) {
+        this.courseNum = courseNum;
     }
 
-    public void setcNum(int cNum) {
-        this.cNum = cNum;
+    public String getCourseType() {
+        return courseType;
     }
 
-    public String getcType() {
-        return cType;
-    }
-
-    public void setcType(String cType) {
-        this.cType = cType;
-    }
-
-    public ArrayList<String> getcIdList() {
-        return cIdList;
-    }
-
-    public void setcIdList(ArrayList<String> cIdList) {
-        this.cIdList = cIdList;
-    }
-
-    public ArrayList<String> getcNameList() {
-        return cNameList;
-    }
-
-    public void setcNameList(ArrayList<String> cNameList) {
-        this.cNameList = cNameList;
-    }
-
-    public ArrayList<String> getcNumList() {
-        return cNumList;
-    }
-
-    public void setcNumList(ArrayList<String> cNumList) {
-        this.cNumList = cNumList;
-    }
-
-    public ArrayList<String> getcTypeList() {
-        return cTypeList;
-    }
-
-    public void setcTypeList(ArrayList<String> cTypeList) {
-        this.cTypeList = cTypeList;
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
     }
 }

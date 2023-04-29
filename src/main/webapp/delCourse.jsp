@@ -1,7 +1,8 @@
 <%@ page import="cn.edu.njust.dao.CourseDAO" %>
 <%@ page import="cn.edu.njust.pojo.Course" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="cn.edu.njust.dao.impl.CourseDAOImpl" %><%--
+<%@ page import="cn.edu.njust.dao.impl.CourseDAOImpl" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: NJUST'er'wang's
   Date: 2023/4/29
@@ -15,17 +16,10 @@
 </head>
 <body>
 <a href="course.jsp">查看全部课程</a>
-<form action="MyDelete" onsubmit="return del()">
+<form action="courseController" onsubmit="return del()">
     <input type="hidden" name="operation" value="del">
     <%
-        CourseDAO courseDAO = new CourseDAOImpl();
-        // 读取对象
-        Course course = courseDAO.readCourse();
-        ArrayList<String> Idlist = course.getcIdList();
-        ArrayList<String> nameList = course.getcNameList();
-        ArrayList<String> numList = course.getcNumList();
-        ArrayList<String> typeList = course.getcTypeList();
-
+        List<Course> courseList = new CourseDAOImpl().getCourse();
     %>
     <table border="2">
         <tr>
@@ -36,17 +30,17 @@
             <td><b>课程性质</b></td>
         </tr>
         <%
-            for (int i = 0; i < Idlist.size(); i++) {
+            for (Course course : courseList) {
         %>
         <tr>
-            <td><input type="checkbox" value=<%=nameList.get(i)%> name="flag"/></td>
-            <td><%=Idlist.get(i)%>
+            <td><input type="checkbox" value=<%=course.getCourseName()%> name="flag"/></td>
+            <td><%=course.getCourseId()%>
             </td>
-            <td><%=nameList.get(i)%>
+            <td><%=course.getCourseName()%>
             </td>
-            <td><%=numList.get(i)%>
+            <td><%=course.getCourseNum()%>
             </td>
-            <td><%=typeList.get(i)%>
+            <td><%=course.getCourseType()%>
             </td>
         </tr>
         <%

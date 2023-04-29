@@ -9,56 +9,53 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDAOImpl implements CourseDAO {
+    private String driver = "com.mysql.jdbc.Driver";
     public String url = "jdbc:mysql://localhost:3306/59_JDBC";
     public String username = "root";
     public String password = "root";
-    public Connection con = null;
+    public Connection conn = null;
 
     @Override
-    public Course readCourse() {
-        Connection conn = null;
-        Course course = new Course();
+    public List<Course> getCourse() {
+
+        List<Course> courseList = new ArrayList<>();
         try {
-            // 加载注册JDBC驱动
-            Class.forName("com.mysql.jdbc.Driver");
+            // 1.加载注册JDBC驱动
+            Class.forName(driver);
 
-            // 创建数据库连接
-            conn = (Connection) DriverManager.getConnection(url, username,
-                    password);
+            // 2.创建数据库连接
+            conn = (Connection) DriverManager.getConnection(url, username, password);
 
-            // 创建createStatement
+            // 3.创建createStatement
             Statement statement = (Statement) conn.createStatement();
+            // 4.String sql = "Select * from course";
             ResultSet rs = statement.executeQuery("Select * from course");
 
-            // 遍历查询结果
-            ArrayList<String> l1 = new ArrayList<>();
-            ArrayList<String> l2 = new ArrayList<>();
-            ArrayList<String> l3 = new ArrayList<>();
-            ArrayList<String> l4 = new ArrayList<>();
+            // 5.遍历查询结果
             while (rs.next()) {
-                l1.add(rs.getString("cId"));
-                l2.add(rs.getString("cName"));
-                l3.add(String.valueOf(rs.getInt("cNum")));
-                l4.add(rs.getString("cType"));
+                // 5.1 获取一条记录
+                String id = rs.getString("cId");
+                String name = rs.getString("cName");
+                int num = rs.getInt("cNum");
+                String type = rs.getString("cType");
+                // 5.2 构建实例
+                Course course = new Course(id, name, num, type);
+                // 5.3 封装结果
+                courseList.add(course);
             }
-            // 将信息返回给course
-            course.setcIdList(l1);
-            course.setcNameList(l2);
-            course.setcNumList(l3);
-            course.setcTypeList(l4);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (conn != null && !conn.isClosed())
-                    conn.close();
+                if (conn != null && !conn.isClosed()) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return course;
+        return courseList;
     }
 
     @Override
@@ -66,24 +63,25 @@ public class CourseDAOImpl implements CourseDAO {
         Connection conn = null;
         int ret = 0;
         try {
-            // 加载注册JDBC驱动
-            Class.forName("com.mysql.jdbc.Driver");
+            // 1.加载注册JDBC驱动
+            Class.forName(driver);
 
-            // 创建数据库连接
-            conn = (Connection) DriverManager.getConnection(url, username,
-                    password);
+            // 2.创建数据库连接
+            conn = (Connection) DriverManager.getConnection(url, username, password);
 
-            // 创建createStatement
+            // 3.创建createStatement
             Statement statement = (Statement) conn.createStatement();
 
             for (int i = 0; i < s.length; i++) {
-                String sql = "delete from course where cName='" + s[i] + "'";// 生成一条sql语句
-                int num = statement.executeUpdate(sql);// 执行sql语句
+                // 拼接 SQL 语句
+                String sql = "delete from course where cName='" + s[i] + "'";
+                // 执行 update 方法
+                int num = statement.executeUpdate(sql);
                 if (ret == 0) ret = num;
             }
             conn.close();
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
