@@ -30,12 +30,15 @@ public class CourseServiceImpl implements CourseService {
 
             // 3.创建createStatement
             Statement statement = (Statement) conn.createStatement();
-            String sql = "insert into course values(?,?,?,?)";//数据库操作语句（插入）
-            PreparedStatement pst = conn.prepareStatement(sql);//用来执行SQL语句查询，对sql语句进行预编译处理
-            pst.setString(1, course.getcId());
-            pst.setString(2, course.getcName());
-            pst.setInt(3, course.getcNum());
-            pst.setString(4, course.getcType());
+            // 4.拼接数据库操作语句（插入）
+            String sql = "insert into course values(?,?,?,?)";
+            // 用来执行SQL语句查询，对sql语句进行预编译处理
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, course.getCourseId());
+            pst.setString(2, course.getCourseName());
+            pst.setInt(3, course.getCourseNum());
+            pst.setString(4, course.getCourseType());
+            // 5.执行语句
             ret = pst.executeUpdate();
 
         } catch (Exception e) {

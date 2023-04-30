@@ -1,6 +1,4 @@
-<%@ page import="cn.edu.njust.dao.CourseDAO" %>
 <%@ page import="cn.edu.njust.dao.impl.CourseDAOImpl" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="cn.edu.njust.pojo.Course" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,10 +9,6 @@
 <body>
 <div>
     <a href="course.jsp">查看全部课程</a>
-    <%
-        // 1.获取课程列表
-        List<Course> courseList = new CourseDAOImpl().getCourse();
-    %>
     <table border="1">
         <tr>
             <td>&nbsp;</td>
@@ -24,6 +18,9 @@
             <td><b>课程性质</b></td>
         </tr>
         <%
+            // 1.获取课程列表
+            List<Course> courseList = new CourseDAOImpl().getCourse();
+            // 2.遍历集合
             for (Course course : courseList) {
         %>
         <tr>

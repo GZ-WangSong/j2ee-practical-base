@@ -1,7 +1,7 @@
-<%@ page import="com.mysql.jdbc.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="cn.edu.njust.pojo.Course" %>
+<%@ page import="cn.edu.njust.dao.impl.CourseDAOImpl" %>
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: NJUST'er'wang's
   Date: 2023/4/29
@@ -15,21 +15,10 @@
 </head>
 <body>
 <div>
-    <a href="course.jsp">查看全部课程</a>
-    <%
-        Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/59_JDBC";
-        String username = "root";
-        String password = "root";
-        Connection conn = DriverManager.getConnection(url, username,
-                password);
-
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM course");
-    %>
+    <input type="button" value="查看全部课程" onclick="location.href = 'course.jsp' ">
     <table border="1">
         <tr>
-            <td>&nbsp;</td>
+            <td></td>
             <td><b>序号</b></td>
             <td><b>课程名称</b></td>
             <td><b>选课人数</b></td>
@@ -37,31 +26,31 @@
         </tr>
 
         <%
-            while (rs.next()) {
-                if (rs.getInt("cNum") != 0) {
+            List<Course> courseList = new CourseDAOImpl().getCourse();
+            int index = 1;
+            for (Course course : courseList) {
         %>
         <tr>
-            <td><input type="checkbox"></td>
-            <td><%=rs.getString(1)%>
+            <td><%=index++%>
             </td>
-            <td><%=rs.getString("cName")%>
+            <td><%=course.getCourseId()%>
             </td>
-            <td><%=rs.getInt("cNum")%>
+            <td><%=course.getCourseName()%>
             </td>
-            <td><%=rs.getString("cType")%>
+            <td><%=course.getCourseNum()%>
+            </td>
+            <td><%=course.getCourseType()%>
             </td>
         </tr>
         <%
-                }
             }
         %>
     </table>
     <br>
-    <br> &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" onclick="window.location.href='addCourse.jsp';"
-           value="新增"/> &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" onclick="window.location.href='delCourse.jsp';"
-           value="删除"/>
+    <br>
+    <input type="button" value="新增" onclick="window.location.href='addCourse.jsp'"/>
+    <br>
+    <input type="button" value="删除" onclick="window.location.href='delCourse.jsp'"/>
 </div>
 
 </body>

@@ -24,7 +24,7 @@
             <option value="必修">必修</option>
             <option value="选修">选修</option>
         </select><br>
-        <input type="submit" value="提交">
+        <input type="submit" value="添加课程">
     </form>
 </div>
 </body>

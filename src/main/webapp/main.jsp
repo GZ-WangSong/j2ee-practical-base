@@ -10,7 +10,7 @@
 <head>
     <title>首页</title>
 
-    <meta http-equiv="Refresh" content="6;url=course.jsp ">
+    <meta http-equiv="Refresh" content="5;url=course.jsp ">
 </head>
 <body>
 <div>
@@ -21,7 +21,7 @@
 
 
 <script>
-    let times = 7;
+    let times = 6;
     clock();
 
     function clock() {

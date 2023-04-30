@@ -32,7 +32,7 @@ public class CourseController extends HttpServlet {
                 Course course = new Course(cId, cName, Integer.parseInt(cNum), cType);
                 int check = courseService.addCourse(course);
                 if (check > 0)
-                    response.sendRedirect("submitSuccessful.jsp");
+                    response.sendRedirect("course.jsp");
                 else
                     response.sendRedirect("courseFailure.jsp");
             }
@@ -41,15 +41,13 @@ public class CourseController extends HttpServlet {
         if ("del".equals(operation)) {
             String[] s = request.getParameterValues("flag");
             if (s != null) {
-                CourseService cs = new CourseServiceImpl();
-                int check = cs.deleteCourse(s);
+                int check = courseService.deleteCourse(s);
                 if (check > 0)
-                    response.sendRedirect("submitSuccessful.jsp");
+                    response.sendRedirect("course.jsp");
                 else
                     response.sendRedirect("courseFailure.jsp");
             }
         }
-
     }
 
     @Override
