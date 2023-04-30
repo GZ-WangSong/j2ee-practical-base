@@ -17,4 +17,8 @@ public interface CourseDAO {
 
     int addCourse(Course course);
     int deleteCourse(String[] s);
+
+    int getTotalCount();
+
+    List<Course> queryCourseByPage(int currentPage, int pageSize);
 }

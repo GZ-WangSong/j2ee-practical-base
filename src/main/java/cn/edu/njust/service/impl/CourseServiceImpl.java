@@ -7,6 +7,8 @@ import cn.edu.njust.dao.impl.HitCourseDAOImpl;
 import cn.edu.njust.pojo.Course;
 import cn.edu.njust.service.CourseService;
 
+import java.util.List;
+
 public class CourseServiceImpl implements CourseService {
     private final CourseDAO courseDAO = new CourseDAOImpl();
     private final HitCourseDAO hitCourseDAO = new HitCourseDAOImpl();
@@ -23,6 +25,7 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * 退选课程
+     *
      * @param sId 选中的ID
      * @return 返回影响的行数
      */
@@ -34,5 +37,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public int chooseCourse(String[] cId, int id) {
         return hitCourseDAO.chooseCourse(cId, id);
+    }
+
+    @Override
+    public int getTotalCount() {
+        return courseDAO.getTotalCount();
+    }
+
+    @Override
+    public List<Course> queryCourseByPage(int currentPage, int pageSize) {
+        return courseDAO.queryCourseByPage(currentPage, pageSize);
     }
 }

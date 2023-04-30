@@ -8,6 +8,7 @@ import com.mysql.jdbc.Connection;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,4 +99,46 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return ret;
     }
+
+    /**
+     * 查询数据总数
+     *
+     * @return 总数
+     */
+    @Override
+    public int getTotalCount() {
+        // 1.获取数据库连接
+        Connection coon = (Connection) JDBCUtils.getConnection();
+        // 2.SQL语句
+        String sql = "select count(*) from Course";
+        int count = -1;
+        try {
+            count = QUERY_RUNNER.query(coon, sql, new ScalarHandler<Integer>(1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(coon);
+        }
+        return count;
+    }
+
+    @Override
+    public List<Course> queryCourseByPage(int currentPage, int pageSize) {
+        Connection conn = (Connection) JDBCUtils.getConnection();
+        List<Course> arrayList = new ArrayList<>();
+        try {
+            String sql = "select * from Course limit ?,?";
+            Object[] params = {(currentPage - 1) * pageSize, pageSize};
+
+            arrayList = QUERY_RUNNER.query(conn, sql, new BeanListHandler<>(Course.class,CourseMapping.getProcessor()), params);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return arrayList;
+    }
+
+
 }
