@@ -8,23 +8,24 @@
 </head>
 <body>
 <div>
-    <a href="course.jsp">查看全部课程</a>
+    <input type="button" value="查看全部课程" onclick="location.href = 'course.jsp' ">
     <table border="1">
         <tr>
-            <td>&nbsp;</td>
+            <td></td>
             <td><b>序号</b></td>
             <td><b>课程名称</b></td>
             <td><b>选课人数</b></td>
             <td><b>课程性质</b></td>
         </tr>
+
         <%
-            // 1.获取课程列表
             List<Course> courseList = new CourseDAOImpl().getCourse();
-            // 2.遍历集合
+            int index = 1;
             for (Course course : courseList) {
         %>
         <tr>
-            <td><input type="checkbox"></td>
+            <td><%=index++%>
+            </td>
             <td><%=course.getCourseId()%>
             </td>
             <td><%=course.getCourseName()%>
@@ -40,10 +41,9 @@
     </table>
     <br>
     <br>
-    <input type="button" onclick="window.location.href='addCourse.jsp';"
-           value="新增"/>
-    <input type="button" onclick="window.location.href='delCourse.jsp';"
-           value="删除"/>
+    <input type="button" value="新增" onclick="window.location.href='addCourse.jsp'"/>
+    <br>
+    <input type="button" value="删除" onclick="window.location.href='delCourse.jsp'"/>
 </div>
 </body>
 </html>

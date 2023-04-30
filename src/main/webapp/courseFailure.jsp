@@ -14,7 +14,6 @@
 <div>
     <b>请求出错！！！</b><br>
     <br>
-
     <a href="allCourse.jsp">返回allCourse.jsp页面</a>
 </div>
 </body>

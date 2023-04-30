@@ -14,7 +14,7 @@
 
 <form action="loginController" method="post" name="form1">
     用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户：<input type="text" name="name"><BR>
-    密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="text" name="pwd"><BR>
+    密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="pwd"><BR>
     验&nbsp;证&nbsp;码：&nbsp;<input type="text" name="safeCode">&nbsp;8774<br>
     所在学院：
     <select name="school" onChange="getDepartment()">

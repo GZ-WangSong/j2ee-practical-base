@@ -2,6 +2,7 @@ package cn.edu.njust.dao.impl;
 
 import cn.edu.njust.dao.UserDAO;
 import cn.edu.njust.pojo.Login;
+import cn.edu.njust.util.DBConfig;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -17,20 +18,16 @@ import java.sql.ResultSet;
  * @Description:
  */
 public class UserDAOImpl implements UserDAO {
-    private final String driver = "com.mysql.jdbc.Driver";
-    private final String url = "jdbc:mysql://localhost:3306/59_JDBC";
-    private final String username = "root";
-    private final String password = "root";
     @Override
-    public int findByName(Login login) {
+    public int queryByName(Login login) {
         int result = 1;//用户不存在
         Connection conn = null;
         try {
             // 1.加载注册jdbc驱动
-            Class.forName(driver);
+            Class.forName(DBConfig.DRIVER);
 
             // 2.创建数据库连接
-            conn = (Connection) DriverManager.getConnection(url, username, password);
+            conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
             // 3.创建createStatement
             Statement stmt = (Statement) conn.createStatement();

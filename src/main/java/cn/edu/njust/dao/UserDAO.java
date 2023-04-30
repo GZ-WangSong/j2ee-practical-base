@@ -11,5 +11,5 @@ import cn.edu.njust.pojo.Login;
  * @Description:
  */
 public interface UserDAO {
-    int findByName(Login login);
+    int queryByName(Login login);
 }

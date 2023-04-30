@@ -10,7 +10,7 @@
 <head>
     <title>首页</title>
 
-    <meta http-equiv="Refresh" content="5;url=course.jsp ">
+    <meta http-equiv="Refresh" content="5;url=allCourse.jsp ">
 </head>
 <body>
 <div>

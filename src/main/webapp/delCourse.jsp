@@ -15,7 +15,7 @@
 </head>
 <body>
 <div>
-    <input type="button" value="查看全部课程" onclick="location.href = 'course.jsp'"/>
+    <input type="button" value="查看全部课程" onclick="location.href = 'allCourse.jsp'"/>
 
     <form action="courseController" onsubmit="return del()">
         <input type="hidden" name="operation" value="del">

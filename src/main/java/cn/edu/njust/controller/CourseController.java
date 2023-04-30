@@ -32,7 +32,7 @@ public class CourseController extends HttpServlet {
                 Course course = new Course(cId, cName, Integer.parseInt(cNum), cType);
                 int check = courseService.addCourse(course);
                 if (check > 0)
-                    response.sendRedirect("course.jsp");
+                    response.sendRedirect("allCourse.jsp");
                 else
                     response.sendRedirect("courseFailure.jsp");
             }
@@ -43,7 +43,7 @@ public class CourseController extends HttpServlet {
             if (s != null) {
                 int check = courseService.deleteCourse(s);
                 if (check > 0)
-                    response.sendRedirect("course.jsp");
+                    response.sendRedirect("allCourse.jsp");
                 else
                     response.sendRedirect("courseFailure.jsp");
             }

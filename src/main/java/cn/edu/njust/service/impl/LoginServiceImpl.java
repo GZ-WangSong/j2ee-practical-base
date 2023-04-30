@@ -16,9 +16,14 @@ import java.util.Random;
  * @Description:
  */
 public class LoginServiceImpl implements LoginService {
-    private UserDAO userDAO = new UserDAOImpl();
+    private final UserDAO userDAO = new UserDAOImpl();
 
 
+    /**
+     * 获取随机数 -- 第2次作业要求
+     * @param value
+     * @return
+     */
     @Override
     public Integer randomInt(int value) {
         // 获取随机数
@@ -32,6 +37,13 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
+    /**
+     * 得到返回结果 -- 第2次作业
+     * @param name
+     * @param psw
+     * @param code
+     * @return
+     */
     @Override
     public String getResult(String name, String psw, String code) {
         // 获取输入字符中的序号
@@ -42,7 +54,6 @@ public class LoginServiceImpl implements LoginService {
                 break;
             }
         }
-
         // 分离姓名和序号
         String username = name.substring(0, index);
         int num = Integer.parseInt(name.substring(index));
@@ -62,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     public int success(Login login) {
-        return userDAO.findByName(login);
+        return userDAO.queryByName(login);
     }
 
     public String reason(int result) {
