@@ -9,12 +9,10 @@ import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDAOImpl implements CourseDAO {
-    public Connection conn = null;
 
     @Override
     public List<Course> getCourse() {
@@ -25,9 +23,10 @@ public class CourseDAOImpl implements CourseDAO {
             Class.forName(DBConfig.DRIVER);
 
             // 2.创建数据库连接
-            conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
+            Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
             // 3.创建createStatement
+
             Statement statement = (Statement) conn.createStatement();
             // 4.String sql = "Select * from course";
             ResultSet rs = statement.executeQuery("Select * from course");
@@ -44,28 +43,27 @@ public class CourseDAOImpl implements CourseDAO {
                 // 5.3 封装结果
                 courseList.add(course);
             }
+
+            // 6.关闭资源
+            rs.close();
+            statement.close();
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null && !conn.isClosed()) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return courseList;
     }
 
     @Override
     public int addCourse(Course course) {
-        Connection conn = null;
         int ret = 0;
         try {
             // 1.加载注册JDBC驱动
             Class.forName(DBConfig.DRIVER);
 
             // 2.创建数据库连接
-            conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
+            Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
             // 3.拼接数据库操作语句（插入）
             String sql = "insert into course values(?,?,?,?)";
@@ -79,51 +77,42 @@ public class CourseDAOImpl implements CourseDAO {
             // 4.2 执行语句
             ret = pst.executeUpdate();
 
+            // 5.关闭资源
+            pst.close();
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null && !conn.isClosed())
-                    conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return ret;
     }
 
     @Override
     public int deleteCourse(String[] s) {
-        Connection conn = null;
         int ret = 0;
         try {
             // 1.加载注册JDBC驱动
             Class.forName(DBConfig.DRIVER);
 
             // 2.创建数据库连接
-            conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
+            Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
             // 3.创建createStatement
             Statement statement = (Statement) conn.createStatement();
 
-            for (int i = 0; i < s.length; i++) {
+            for (String value : s) {
                 // 拼接 SQL 语句
-                String sql = "delete from course where cName='" + s[i] + "'";
+                String sql = "delete from course where cName='" + value + "'";
                 // 执行 update 方法
                 int num = statement.executeUpdate(sql);
                 if (ret == 0) ret = num;
             }
+            // 关闭资源
+            statement.close();
             conn.close();
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null && !conn.isClosed())
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return ret;
     }

@@ -21,13 +21,12 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int queryByName(Login login) {
         int result = 1;//用户不存在
-        Connection conn = null;
         try {
             // 1.加载注册jdbc驱动
             Class.forName(DBConfig.DRIVER);
 
             // 2.创建数据库连接
-            conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
+            Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
             // 3.创建createStatement
             Statement stmt = (Statement) conn.createStatement();
@@ -52,15 +51,14 @@ public class UserDAOImpl implements UserDAO {
                     }
                 }
             }
+
+            // 5.关闭资源
+            rs.close();
+            stmt.close();
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null && !conn.isClosed())
-                    conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }
