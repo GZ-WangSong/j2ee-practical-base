@@ -18,7 +18,7 @@ public interface LoginService {
 
     boolean checkSafeCode(String safeCode);
 
-    int success(Login login);
+    Login checkLogin(Login login);
 
     String reason(int result);
 }

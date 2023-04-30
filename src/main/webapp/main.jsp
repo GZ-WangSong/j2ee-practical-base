@@ -10,7 +10,10 @@
 <head>
     <title>首页</title>
 
-    <meta http-equiv="Refresh" content="5;url=allCourse.jsp ">
+    <%-- 第5次作业跳转 --%>
+<%--    <meta http-equiv="Refresh" content="5;url=allCourse.jsp ">--%>
+    <%-- 第6次作业跳转要求 --%>
+    <meta http-equiv="Refresh" content="5;url=hitCourse.jsp ">
 </head>
 <body>
 <div>

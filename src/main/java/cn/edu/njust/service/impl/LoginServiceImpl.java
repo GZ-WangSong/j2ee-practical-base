@@ -72,8 +72,8 @@ public class LoginServiceImpl implements LoginService {
         return safeCode.equals("8774");
     }
 
-    public int success(Login login) {
-        return userDAO.queryByName(login);
+    public Login checkLogin(Login login) {
+        return userDAO.queryByCondition(login);
     }
 
     public String reason(int result) {

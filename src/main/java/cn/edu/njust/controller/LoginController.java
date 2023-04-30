@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginController", value = "/loginController")
 public class LoginController extends HttpServlet {
 
-    private final LoginService ls = new LoginServiceImpl();
+    private final LoginService loginService = new LoginServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,17 +30,18 @@ public class LoginController extends HttpServlet {
         // 获取一个session，用于保存登录结果
         HttpSession session = request.getSession();
         if(checkCode != null && checkCode.equals("8774")){
-            // 封装登录信息
-            Login login = new Login(name,password,school,department);
-            // 判断登录结果
-            int result = ls.success(login);
+            // 校验登录情况
+            Login login = loginService.checkLogin(new Login(name,password,school,department));
 
-            if(result == 0){
+            if(login != null){
+                // 保存当前登录用户
+                session.setAttribute("loginUser", login);
+
                 session.setAttribute("status", "6");
                 response.sendRedirect("main.jsp");
             }
             else{
-                session.setAttribute("str", "失败原因"+ls.reason(result));
+                session.setAttribute("str", "登录失败！");
                 response.sendRedirect("loginFailure.jsp");
             }
         }

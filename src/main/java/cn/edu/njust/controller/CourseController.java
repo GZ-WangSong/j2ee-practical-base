@@ -1,6 +1,7 @@
 package cn.edu.njust.controller;
 
 import cn.edu.njust.pojo.Course;
+import cn.edu.njust.pojo.Login;
 import cn.edu.njust.service.CourseService;
 import cn.edu.njust.service.impl.CourseServiceImpl;
 
@@ -19,7 +20,7 @@ public class CourseController extends HttpServlet {
         String operation = request.getParameter("operation");
 
         // 添加课程
-        if ("add".equals(operation)){
+        if ("add".equals(operation)) {
             String cId = request.getParameter("cId");
             String cName = request.getParameter("cName");
             String cNum = request.getParameter("cNum");
@@ -46,6 +47,44 @@ public class CourseController extends HttpServlet {
                     response.sendRedirect("allCourse.jsp");
                 else
                     response.sendRedirect("courseFailure.jsp");
+            }
+        }
+        if ("choose".equals(operation)) {
+            String []cId = request.getParameterValues("flag");
+            HttpSession session = request.getSession();
+            if(cId!=null){
+
+                Login loginUser = (Login) session.getAttribute("loginUser");
+
+                int check = courseService.chooseCourse(cId, loginUser.getId());
+                if(check>0){
+                    session.setAttribute("succeedStr", "选课成功！！！");
+                    response.sendRedirect("submitSuccessful.jsp");
+                }else{
+                    session.setAttribute("errorStr", "选课失败！！！");
+                    response.sendRedirect("courseFailure.jsp");
+                }
+            }else{
+                session.setAttribute("errorStr", "选项为空！！！");
+                response.sendRedirect("courseFailure.jsp");
+            }
+        }
+        // 退选课程
+        if ("withdrawal".equals(operation)) {
+            String[] sId = request.getParameterValues("choose");
+            HttpSession session = request.getSession();
+            if (sId != null) {
+                int check = courseService.withdrawalChoose(sId);
+                if (check > 0) {
+                    session.setAttribute("succeedStr", "退选成功！！！");
+                    response.sendRedirect("submitSuccessful.jsp");
+                } else {
+                    session.setAttribute("errorStr", "退选课程失败！！！");
+                    response.sendRedirect("courseFailure.jsp");
+                }
+            } else {
+                session.setAttribute("errorStr", "选项为空！！！");
+                response.sendRedirect("courseFailure.jsp");
             }
         }
     }

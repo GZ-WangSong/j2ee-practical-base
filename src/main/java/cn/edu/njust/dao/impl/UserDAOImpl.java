@@ -4,7 +4,7 @@ import cn.edu.njust.dao.UserDAO;
 import cn.edu.njust.pojo.Login;
 import cn.edu.njust.util.DBConfig;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,8 +19,7 @@ import java.sql.ResultSet;
  */
 public class UserDAOImpl implements UserDAO {
     @Override
-    public int queryByName(Login login) {
-        int result = 1;//用户不存在
+    public Login queryByCondition(Login login) {
         try {
             // 1.加载注册jdbc驱动
             Class.forName(DBConfig.DRIVER);
@@ -28,38 +27,31 @@ public class UserDAOImpl implements UserDAO {
             // 2.创建数据库连接
             Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
 
-            // 3.创建createStatement
-            Statement stmt = (Statement) conn.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from user");
+            // 3.使用PreparedStatement操作数据库
+            String sql = "SELECT * FROM user WHERE uName = ? and uPw = ? and uSchool = ? and uDepartment = ?";
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+            // 3.1 设置参数占位符
+            pst.setString(1, login.getName());
+            pst.setString(2, login.getPassword());
+            pst.setString(3, login.getSchool());
+            pst.setString(4, login.getDepartment());
 
-            // 4.遍历查询结果
-            while (rs.next()) {
-                String uName = rs.getString("uName");
-                String uPw = rs.getString("uPw");
-                String uSchool = rs.getString("uSchool");
-                String uDepartment = rs.getString("uDepartment");
-                // 对比数据库信息，层层递进的检验
-                if (login.getName().equals(uName)) {
-                    result = 2;
-                    if (login.getPassword().equals(uPw)) {
-                        result = 4;
-                        if (login.getSchool().equals(uSchool)) {
-                            result = 5;
-                            if (login.getDepartment().equals(uDepartment))
-                                result = 0;//最终若是相等，则返回0
-                        }
-                    }
-                }
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                login.setId(resultSet.getInt("uId"));
+            } else {
+                login = null;
             }
 
             // 5.关闭资源
-            rs.close();
-            stmt.close();
+            resultSet.close();
+            pst.close();
             conn.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return login;
     }
 }

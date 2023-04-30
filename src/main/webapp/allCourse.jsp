@@ -44,6 +44,8 @@
     <input type="button" value="新增" onclick="window.location.href='addCourse.jsp'"/>
     <br>
     <input type="button" value="删除" onclick="window.location.href='delCourse.jsp'"/>
+    <br>
+    <input type="button" value="选课" onclick="window.location.href='delCourse.jsp'"/>
 </div>
 </body>
 </html>
