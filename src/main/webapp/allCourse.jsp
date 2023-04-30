@@ -13,29 +13,6 @@
 <div>
     <input type="button" value="查看个人课表" onclick="location.href='hitCourse.jsp'">
 
-    <%
-        CourseService courseService = new CourseServiceImpl();
-        // 1.获取总记录数
-        int count = courseService.getTotalCount();
-
-        String cPage = request.getParameter("currentPage");
-        if (cPage == null)
-            cPage = "1";
-
-        int currentPage = Integer.parseInt(cPage);
-
-        int pageSize = 10;
-
-        List<Course> courseList = courseService.queryCourseByPage(currentPage, pageSize);
-
-        int sumPage = count % pageSize == 0 ? count / pageSize : count
-                % pageSize + 1;
-        CoursePage cp = new CoursePage(currentPage, pageSize, courseList,
-                count, sumPage);
-
-        request.setAttribute("coursePage", cp);
-    %>
-
     <table border="1">
         <tr>
             <td></td>
@@ -46,7 +23,26 @@
         </tr>
 
         <%
-            // List<Course> courseList = new CourseDAOImpl().getCourse();
+            CourseService courseService = new CourseServiceImpl();
+            // 1.获取总记录数
+            int count = courseService.getTotalCount();
+
+            String cPage = request.getParameter("currentPage");
+            if (cPage == null)
+                cPage = "1";
+
+            int currentPage = Integer.parseInt(cPage);
+
+            int pageSize = 10;
+
+            List<Course> courseList = courseService.queryCourseByPage(currentPage, pageSize);
+
+            int sumPage = count % pageSize == 0 ? count / pageSize : count
+                    % pageSize + 1;
+            CoursePage cp = new CoursePage(currentPage, pageSize, courseList,
+                    count, sumPage);
+
+            request.setAttribute("coursePage", cp);
             int index = 1;
             for (Course course : courseList) {
         %>

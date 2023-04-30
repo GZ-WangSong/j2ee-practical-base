@@ -108,18 +108,19 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     public int getTotalCount() {
         // 1.获取数据库连接
-        Connection coon = (Connection) JDBCUtils.getConnection();
+        Connection con = (Connection) JDBCUtils.getConnection();
         // 2.SQL语句
         String sql = "select count(*) from Course";
-        int count = -1;
+        long count = -1;
         try {
-            count = QUERY_RUNNER.query(coon, sql, new ScalarHandler<Integer>(1));
+            // 注意，这个方法默认返回Long类型的数据
+            count = QUERY_RUNNER.query(con, sql, new ScalarHandler<>());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DbUtils.closeQuietly(coon);
+            DbUtils.closeQuietly(con);
         }
-        return count;
+        return (int)count;
     }
 
     @Override
