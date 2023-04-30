@@ -25,8 +25,7 @@
 5. 第5次作业：`7ae8f9d71334888f443b8875b0225a9f37a2a287`；
 6. 第6次作业：`7570f436f4930e456da6fc55775b93ed02ce4d52`；
 7. 第7次作业：`e04174b140aa688b95b4af4ee5cda4e6a039147d`；
-8. 期末考核项目：
-
+8. 期末考核项目：[仓库地址](https://gitee.com/NJUSTer_songw/j2-ee-final-project)
 
 
 ---
