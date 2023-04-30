@@ -10,7 +10,7 @@
 <head>
     <title>登录失败</title>
 
-    <meta http-equiv= "Refresh" content= "6;url=login.jsp ">
+    <meta http-equiv= "Refresh" content= "5;url=login.jsp ">
 </head>
 <body>
 <div>
@@ -21,7 +21,7 @@
 </div>
 
 <script>
-    let times = 7;
+    let times = 6;
     clock();
     function clock()
     {

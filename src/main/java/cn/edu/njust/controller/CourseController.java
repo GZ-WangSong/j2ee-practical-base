@@ -59,7 +59,7 @@ public class CourseController extends HttpServlet {
                 int check = courseService.chooseCourse(cId, loginUser.getId());
                 if(check>0){
                     session.setAttribute("succeedStr", "选课成功！！！");
-                    response.sendRedirect("submitSuccessful.jsp");
+                    response.sendRedirect("hitCourse.jsp");
                 }else{
                     session.setAttribute("errorStr", "选课失败！！！");
                     response.sendRedirect("courseFailure.jsp");
@@ -77,7 +77,7 @@ public class CourseController extends HttpServlet {
                 int check = courseService.withdrawalChoose(sId);
                 if (check > 0) {
                     session.setAttribute("succeedStr", "退选成功！！！");
-                    response.sendRedirect("submitSuccessful.jsp");
+                    response.sendRedirect("hitCourse.jsp");
                 } else {
                     session.setAttribute("errorStr", "退选课程失败！！！");
                     response.sendRedirect("courseFailure.jsp");

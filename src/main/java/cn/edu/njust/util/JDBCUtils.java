@@ -9,33 +9,43 @@ public class JDBCUtils {
     private static String url = null;
     private static String username = null;
     private static String password = null;
+    private static Connection con;
 
+    /*
+     * 加载配置文件
+     */
     static {
         try {
-            InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("/db.properties");
+            // 1.通过输入流拿到配置文件
+            InputStream inputStream = JDBCUtils.class.getClassLoader().getResourceAsStream("/db.properties");
             Properties properties = new Properties();
+            // 2.使用流加载配置文件
+            properties.load(inputStream);
 
-            if (is != null) {
-                properties.load(is);
-                System.out.println("JDBC UTIL");
-                driver = properties.getProperty("driver");
-                url = properties.getProperty("url");
-                username = properties.getProperty("username");
-                password = properties.getProperty("password");
-            } else {
-                driver = "com.mysql.jdbc.Driver";
-                url = "jdbc:mysql://localhost:3306/59_JDBC?useUnicode=true&characterEncoding=utf-8";
-                username = "root";
-                password = "root";
-            }
-            Class.forName(driver);
+            // 通过 getProperty 方法，传入键，获取值
+            driver = properties.getProperty("driver");
+            url = properties.getProperty("url");
+            username = properties.getProperty("username");
+            password = properties.getProperty("password");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+    /**
+     * 获取数据库连接对象
+     *
+     * @return 返回一个 Connection 对象
+     */
+    public static Connection getConnection() {
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return con;
     }
 
     public static void release(Connection connection,

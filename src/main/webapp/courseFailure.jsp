@@ -12,9 +12,9 @@
 </head>
 <body>
 <div>
-    <b>请求出错！！！</b><br>
+    <b>请求出错！！！请联系管理员</b><br>
     <br>
-    <a href="allCourse.jsp">返回allCourse.jsp页面</a>
+    <input type="button" value="查看个人课表" onclick="location.href='hitCourse.jsp'">
 </div>
 </body>
 </html>

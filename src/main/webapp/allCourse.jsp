@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-    <input type="button" value="查看全部课程" onclick="location.href = 'course.jsp' ">
+    <input type="button" value="查看个人课表" onclick="location.href='hitCourse.jsp'">
     <table border="1">
         <tr>
             <td></td>
@@ -45,7 +45,7 @@
     <br>
     <input type="button" value="删除" onclick="window.location.href='delCourse.jsp'"/>
     <br>
-    <input type="button" value="选课" onclick="window.location.href='delCourse.jsp'"/>
+    <input type="button" value="选课" onclick="window.location.href='chooseCourse.jsp'"/>
 </div>
 </body>
 </html>

@@ -1,13 +1,13 @@
 package cn.edu.njust.dao.impl;
 
 import cn.edu.njust.dao.UserDAO;
+import cn.edu.njust.mapping.LoginMapping;
 import cn.edu.njust.pojo.Login;
-import cn.edu.njust.util.DBConfig;
+import cn.edu.njust.util.JDBCUtils;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 /**
  * -*- coding: UTF-8 -*-
@@ -18,36 +18,24 @@ import java.sql.ResultSet;
  * @Description:
  */
 public class UserDAOImpl implements UserDAO {
+    private static final QueryRunner QUERY_RUNNER = new QueryRunner();
+
+    /**
+     * 查询登录用户是否存在
+     *
+     * @param login 登录表单信息
+     * @return 查询到的对象
+     */
     @Override
     public Login queryByCondition(Login login) {
         try {
-            // 1.加载注册jdbc驱动
-            Class.forName(DBConfig.DRIVER);
+            Connection conn = (Connection) JDBCUtils.getConnection();
 
-            // 2.创建数据库连接
-            Connection conn = (Connection) DriverManager.getConnection(DBConfig.URL, DBConfig.USERNAME, DBConfig.PASSWORD);
-
-            // 3.使用PreparedStatement操作数据库
             String sql = "SELECT * FROM user WHERE uName = ? and uPw = ? and uSchool = ? and uDepartment = ?";
-            PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
-            // 3.1 设置参数占位符
-            pst.setString(1, login.getName());
-            pst.setString(2, login.getPassword());
-            pst.setString(3, login.getSchool());
-            pst.setString(4, login.getDepartment());
+            Object[] params = {login.getName(), login.getPassword(), login.getSchool(), login.getDepartment()};
+            login = QUERY_RUNNER.query(conn, sql, new BeanHandler<>(Login.class, LoginMapping.getProcessor()), params);
 
-            ResultSet resultSet = pst.executeQuery();
-
-            if (resultSet.next()) {
-                login.setId(resultSet.getInt("uId"));
-            } else {
-                login = null;
-            }
-
-            // 5.关闭资源
-            resultSet.close();
-            pst.close();
-            conn.close();
+            DbUtils.closeQuietly(conn);
 
         } catch (Exception e) {
             e.printStackTrace();
