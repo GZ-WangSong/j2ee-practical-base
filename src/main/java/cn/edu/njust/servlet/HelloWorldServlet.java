@@ -8,6 +8,8 @@ package cn.edu.njust.servlet;
  * @Description:
  */
 
+import com.alibaba.fastjson.JSON;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -26,11 +28,13 @@ public class HelloWorldServlet extends HttpServlet {
         String course = this.getServletContext().getInitParameter("course");
 
         // 4. 构造返回值
-        String res = "我是学号为" + studentNo + "的" + name + "同学,<br>" +
+        String res = "我是学号为" + studentNo + "的" + name + "同学," +
                 "这是从"+ course+ "中学习到的一个简单servlet程序";
 
         response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write(res);
+        // 使用 json 数据响应格式
+        String jsonString = JSON.toJSONString(res);
+        response.getWriter().write(jsonString);
 
     }
 

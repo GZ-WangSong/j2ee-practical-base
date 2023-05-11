@@ -7,6 +7,8 @@ package cn.edu.njust.servlet; /**
  * @Description:
  */
 
+import com.alibaba.fastjson.JSON;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -24,8 +26,9 @@ public class ValidateSharedServlet extends HttpServlet {
 
         String res = "contextValue = " + contextValue + "\n" +
                 "sessionValue = " + sessionValue;
+        String jsonString = JSON.toJSONString(res);
 
-        response.getWriter().write(res);
+        response.getWriter().write(jsonString);
     }
 
     @Override
